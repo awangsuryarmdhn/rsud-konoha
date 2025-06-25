@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Laporan PDF Rekam Medis</title>
+  <style>
+    body { font-family: sans-serif; font-size: 13px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 6px; text-align: left; }
+    th { background: #f3f3f3; }
+  </style>
+</head>
+<body>
+  <h2>Laporan Rekam Medis</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Tanggal</th>
+        <th>Pasien</th>
+        <th>Dokter</th>
+        <th>Diagnosa</th>
+        <th>Tindakan</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in data %}
+      <tr>
+        <td>{{ r.tanggal }}</td>
+        <td>{{ r.pasien.nama_lengkap }}</td>
+        <td>{{ r.tenaga_medis.nama_lengkap }}</td>
+        <td>{{ r.diagnosa }}</td>
+        <td>{{ r.tindakan }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>

@@ -1,0 +1,25 @@
+
+{% extends 'simrs/base.html' %}
+{% block title %}Dashboard Admin{% endblock %}
+{% block content %}
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+  <div class="stat bg-white p-4 shadow rounded">
+    <div class="stat-title">Total Pasien</div>
+    <div class="stat-value text-blue-600">{{ total_pasien }}</div>
+  </div>
+  <div class="stat bg-white p-4 shadow rounded">
+    <div class="stat-title">Total Tenaga Medis</div>
+    <div class="stat-value text-green-600">{{ total_dokter }}</div>
+  </div>
+  <div class="stat bg-white p-4 shadow rounded">
+    <div class="stat-title">Total Inventaris</div>
+    <div class="stat-value text-purple-600">{{ total_inventaris }}</div>
+  </div>
+</div>
+
+<div class="mt-6">
+  <a href="{% url 'inventaris_admin' %}" class="btn btn-primary">Kelola Inventaris</a>
+  <a href="{% url 'log_aktivitas' %}" class="btn btn-secondary ml-2">Log Aktivitas</a>
+  <a href="{% url 'laporan_pdf' %}" class="btn btn-accent ml-2">Export Laporan PDF</a>
+</div>
+{% endblock %}

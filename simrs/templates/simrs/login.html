@@ -1,0 +1,21 @@
+{% extends 'simrs/base.html' %}
+{% block title %}Login - RSUD Konoha{% endblock %}
+{% block content %}
+<div class="max-w-md mx-auto mt-20 bg-white p-6 rounded shadow">
+  <h2 class="text-xl font-bold mb-4">🔐 Login Sistem</h2>
+
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-control mb-4">
+      <label class="label">Username</label>
+      <input type="text" name="username" required class="input input-bordered w-full" />
+    </div>
+    <div class="form-control mb-4">
+      <label class="label">Password</label>
+      <input type="password" name="password" required class="input input-bordered w-full" />
+    </div>
+    <button class="btn btn-primary w-full">Masuk</button>
+    <p class="text-sm mt-2 text-center">Belum punya akun? <a href="{% url 'daftar_pasien' %}" class="link text-blue-600">Daftar</a></p>
+  </form>
+</div>
+{% endblock %}

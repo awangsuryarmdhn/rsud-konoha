@@ -1,0 +1,54 @@
+{% extends 'simrs/base.html' %}
+{% block title %}Daftar Pasien{% endblock %}
+{% block content %}
+<div class="max-w-xl mx-auto mt-10 bg-white p-6 shadow rounded">
+  <h2 class="text-xl font-bold mb-4">📋 Daftar Pasien Baru</h2>
+
+  <form method="post">
+    {% csrf_token %}
+    <div class="grid gap-4">
+      <div class="form-control">
+        <label class="label">Username</label>
+        {{ form.username }}
+      </div>
+      <div class="form-control">
+        <label class="label">Nama Lengkap</label>
+        {{ form.nama_lengkap }}
+      </div>
+      <div class="form-control">
+        <label class="label">No HP</label>
+        {{ form.no_hp }}
+      </div>
+      <div class="form-control">
+        <label class="label">Alamat</label>
+        {{ form.alamat }}
+      </div>
+      <div class="form-control">
+        <label class="label">Password</label>
+        {{ form.password1 }}
+      </div>
+      <div class="form-control">
+        <label class="label">Ulangi Password</label>
+        {{ form.password2 }}
+      </div>
+      <button class="btn btn-success">Daftar</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  const usernameField = document.querySelector('#id_username');
+  usernameField.addEventListener('blur', () => {
+    fetch(`/ajax/cek-username/?username=${usernameField.value}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.exists) {
+          Toastify({
+            text: "Username sudah terdaftar!",
+            backgroundColor: "#f87171"
+          }).showToast();
+        }
+      });
+  });
+</script>
+{% endblock %}

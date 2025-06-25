@@ -1,0 +1,29 @@
+{% extends 'simrs/base.html' %}
+{% block title %}Input Rekam Medis{% endblock %}
+{% block content %}
+<div class="max-w-2xl mx-auto bg-white p-6 shadow rounded">
+  <h2 class="text-xl font-bold mb-4">Rekam Medis: {{ janji.pasien.nama_lengkap }}</h2>
+  <form method="post">
+    {% csrf_token %}
+    <div class="grid gap-4">
+      <div>
+        <label class="label">Diagnosa</label>
+        {{ form.diagnosa }}
+      </div>
+      <div>
+        <label class="label">Tindakan</label>
+        {{ form.tindakan }}
+      </div>
+      <div>
+        <label class="label">Resep</label>
+        {{ form.resep }}
+      </div>
+      <div>
+        <label class="label">Catatan</label>
+        {{ form.catatan }}
+      </div>
+    </div>
+    <button class="btn btn-success mt-4">Simpan</button>
+  </form>
+</div>
+{% endblock %}

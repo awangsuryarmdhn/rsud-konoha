@@ -1,0 +1,26 @@
+{% extends 'simrs/base.html' %}
+{% block title %}Log Aktivitas{% endblock %}
+{% block content %}
+<h2 class="text-xl font-bold mb-4">📝 Log Aktivitas Admin</h2>
+
+<table class="table w-full bg-white rounded shadow">
+  <thead>
+    <tr>
+      <th>Pengguna</th>
+      <th>Aksi</th>
+      <th>Waktu</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for log in log_list %}
+    <tr>
+      <td>{{ log.pengguna.username }}</td>
+      <td>{{ log.aksi }}</td>
+      <td>{{ log.waktu|date:"d M Y H:i" }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="3" class="text-center">Belum ada log aktivitas.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

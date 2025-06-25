@@ -1,0 +1,34 @@
+{% extends 'simrs/base.html' %}
+{% block title %}Dashboard Tenaga Medis{% endblock %}
+{% block content %}
+<h2 class="text-xl font-semibold mb-4">Janji Temu Hari Ini</h2>
+
+<table class="table w-full bg-white rounded shadow">
+  <thead>
+    <tr>
+      <th>Pasien</th>
+      <th>Jam</th>
+      <th>Keluhan</th>
+      <th>Aksi</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for j in janji_list %}
+    <tr>
+      <td>{{ j.pasien.nama_lengkap }}</td>
+      <td>{{ j.jam }}</td>
+      <td>{{ j.keluhan }}</td>
+      <td>
+        {% if not j.selesai %}
+          <a href="{% url 'input_rekam_medis' j.id %}" class="btn btn-success btn-sm">Input Rekam</a>
+        {% else %}
+          <span class="badge badge-success">Selesai</span>
+        {% endif %}
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="4" class="text-center">Tidak ada janji hari ini.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

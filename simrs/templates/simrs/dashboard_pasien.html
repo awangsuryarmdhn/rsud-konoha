@@ -1,0 +1,37 @@
+{% extends 'simrs/base.html' %}
+{% block title %}Dashboard Pasien{% endblock %}
+{% block content %}
+<div class="mb-4">
+  <a href="{% url 'buat_janji_temu' %}" class="btn btn-primary">+ Buat Janji Temu</a>
+</div>
+
+<h2 class="text-xl font-semibold mb-2">Riwayat Janji Temu</h2>
+<table class="table w-full bg-white rounded shadow">
+  <thead>
+    <tr>
+      <th>Dokter</th>
+      <th>Tanggal</th>
+      <th>Jam</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for j in janji_list %}
+    <tr>
+      <td>{{ j.tenaga_medis.nama_lengkap }}</td>
+      <td>{{ j.tanggal }}</td>
+      <td>{{ j.jam }}</td>
+      <td>
+        {% if j.selesai %}
+          <span class="badge badge-success">Selesai</span>
+        {% else %}
+          <span class="badge badge-warning">Menunggu</span>
+        {% endif %}
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="4" class="text-center">Belum ada janji.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'simrs/base.html' %}
+{% block title %}Buat Janji Temu{% endblock %}
+{% block content %}
+<div class="max-w-xl mx-auto bg-white p-6 rounded shadow">
+  <h2 class="text-lg font-bold mb-4">Buat Janji Temu</h2>
+  <form method="post" id="janji-form">
+    {% csrf_token %}
+    <div class="mb-4">
+      <label class="label">Tenaga Medis</label>
+      {{ form.tenaga_medis }}
+    </div>
+    <div class="mb-4">
+      <label class="label">Tanggal</label>
+      {{ form.tanggal }}
+    </div>
+    <div class="mb-4">
+      <label class="label">Jam</label>
+      {{ form.jam }}
+    </div>
+    <div class="mb-4">
+      <label class="label">Keluhan</label>
+      {{ form.keluhan }}
+    </div>
+    <button class="btn btn-primary">Kirim</button>
+  </form>
+</div>
+
+<script>
+document.getElementById('janji-form').addEventListener('submit', function(e) {
+  const dokter = document.getElementById('id_tenaga_medis').value;
+  const tanggal = document.getElementById('id_tanggal').value;
+  const jam = document.getElementById('id_jam').value;
+  e.preventDefault();
+
+  fetch(`/ajax/cek-jadwal/?dokter=${dokter}&tanggal=${tanggal}&jam=${jam}`)
+    .then(response => response.json())
+    .then(data => {
+      if (data.bentrok) {
+        Toastify({ text: "Jadwal dokter bentrok!", backgroundColor: "#ef4444" }).showToast();
+      } else {
+        this.submit();
+      }
+    });
+});
+</script>
+{% endblock %}

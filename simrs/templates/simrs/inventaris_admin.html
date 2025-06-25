@@ -1,0 +1,45 @@
+{% extends 'simrs/base.html' %}
+{% block title %}Inventaris Medis{% endblock %}
+{% block content %}
+<h2 class="text-xl font-bold mb-4">📦 Daftar Inventaris Medis</h2>
+
+<form method="get" class="mb-4 flex gap-2">
+  <input type="text" name="q" value="{{ query }}" placeholder="Cari nama atau jenis..." class="input input-bordered w-full max-w-xs">
+  <button class="btn btn-primary">🔍 Cari</button>
+</form>
+
+<a href="{% url 'tambah_inventaris' %}" class="btn btn-success mb-4">+ Tambah Data</a>
+
+<table class="table w-full bg-white rounded shadow">
+  <thead>
+    <tr>
+      <th>Nama</th>
+      <th>Jenis</th>
+      <th>Stok</th>
+      <th>Satuan</th>
+      <th>Aksi</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in inventaris %}
+    <tr>
+      <td>{{ i.nama }}</td>
+      <td>{{ i.jenis }}</td>
+      <td>
+        {% if i.stok <= 5 %}
+          <span class="badge badge-error">{{ i.stok }}</span>
+        {% else %}
+          {{ i.stok }}
+        {% endif %}
+      </td>
+      <td>{{ i.satuan }}</td>
+      <td>
+        <a href="{% url 'hapus_inventaris' i.id %}" class="btn btn-sm btn-error" onclick="return confirm('Hapus item ini?')">🗑️ Hapus</a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="5" class="text-center">Data tidak ditemukan.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
